@@ -1,22 +1,32 @@
+
+
 .App {
-  text-align: center;
+box-shadow: 5px 10px 8px #888888;
+
+  margin-top: 50px;
+}
+.InputS {
+  width: 50%;
+}
+.form {
+  padding: 1em;
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+label {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #09d3ac;
+button {
+  justify-content: flex-end;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
 }

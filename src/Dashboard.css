@@ -1,0 +1,8 @@
+ .Dashboard{
+ border: 2px solid #d3d3d3;
+  border-radius: .5em;
+}
+
+.center{
+	  display: flex;
+}

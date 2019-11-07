@@ -1,0 +1,23 @@
+.chartContainer {
+  display: flex;
+  flex-direction: row;
+}
+.deviceContainer{
+	margin-top: 50px;
+}
+
+
+ .box{
+ border: 2px solid #d3d3d3;
+  border-radius: .5em;
+}
+li {
+  float: left;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
