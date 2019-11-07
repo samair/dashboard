@@ -44,8 +44,8 @@ constructor(props)  {
   };
   this.connectCallBack = this.connectCallBack.bind(this);
   this.onMessageCallBack = this.onMessageCallBack.bind(this);
-  this.socket = new SockJS('http://localhost:8080/test');
-  this.stompClient = Stomp.over(this.socket);
+  //this.socket = new SockJS('http://localhost:8080/test');
+  //this.stompClient = Stomp.over(this.socket);
   }
   randomValues = () =>{
      const cpuRandom = Math.floor(Math.random() * 100) + 1 ;
@@ -90,7 +90,7 @@ constructor(props)  {
      }
 
    componentDidMount() {
-
+/*
     const deviceId = 1233;
     axios.post('http://localhost:8080/subscribe', null, { params: {
     deviceId
@@ -104,7 +104,7 @@ constructor(props)  {
 
     this.stompClient.connect( {}, this.connectCallBack, this.errorCallback);
   
-     /* stompClient.subscribe("/topic/device1");
+    stompClient.subscribe("/topic/device1");
      
 
     // Set the websocket
