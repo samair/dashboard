@@ -17,22 +17,12 @@ export default class Devices extends React.Component {
   openDevice = () => {
     window.open("/Device","_blank");
   }
- // <StompJS onMessage={this.onDeviceMessage} topicName="/topic/devices" server=""/>
+  <StompJS onMessage={this.onDeviceMessage} topicName="/topic/devices" server=""/>
   onDeviceMessage = (message) =>{
 
     const msg = JSON.parse(message.body)
     console.log(msg)
  
-        return (
-            <tr key="3">
-           
-               <td>{msg.deviceId}</td>
-               <td>{msg.name}</td>
-               <td></td>
-               <td></td>
-               
-            </tr>
-            );
           
   }
 

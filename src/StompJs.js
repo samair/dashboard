@@ -8,7 +8,7 @@ export default class StompJS extends React.Component {
 constructor(props)  {
 	super(props)
 
- this.socket = new SockJS('http://localhost:8080/test');
+ this.socket = new SockJS('https://webvidhi-pubsub.herokuapp.com//test');
  this.stompClient = Stomp.over(this.socket);
 
 }
@@ -39,7 +39,7 @@ errorCallback=(message)=>{
         return (
           
 
-        		<div></div>
+        		<p></p>
         );
       }
 
