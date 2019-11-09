@@ -33,7 +33,7 @@ export default class Devices extends React.Component {
 
       devices: this.state.devices.concat(msg)
   })
-     console.log(devices)
+     console.log(this.state.devices)
      return this.state.devices.map((endpoint, index) => {
          const { deviceID, name, newDevice,removeDevice } = endpoint //destructuring
          console.log("found device")
