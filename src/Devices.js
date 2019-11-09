@@ -17,7 +17,7 @@ export default class Devices extends React.Component {
   openDevice = () => {
     window.open("/Device","_blank");
   }
-  <StompJS onMessage={this.onDeviceMessage} topicName="/topic/devices" server=""/>
+  
   onDeviceMessage = (message) =>{
 
     const msg = JSON.parse(message.body)
@@ -56,7 +56,7 @@ export default class Devices extends React.Component {
                <td>21:34</td>
                <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
             </tr>
-          
+          <StompJS onMessage={this.onDeviceMessage} topicName="/topic/devices" server=""/>
           
         </tbody>
       </Table>
