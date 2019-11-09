@@ -20,6 +20,7 @@ function App() {
         <Switch>
       <Route exact path ="/" component = {Main} />
       <Route exact path="/device" component={Device} />
+      <Route exact path="/device/:id" component={Device} />
 
       </Switch>
       

@@ -90,6 +90,9 @@ constructor(props)  {
      }
 
    componentDidMount() {
+    this.state.deviceId = this.props.match.params.id
+
+    console.log("ok",this.props.match.params.id)
 
     const deviceId = 1233;
     axios.post(' https://webvidhi-pubsub.herokuapp.com/subscribe', null, { params: {
@@ -202,7 +205,7 @@ this.randomValues()
         <tbody>
             <tr key="2">
            
-               <td>{this.state.deviceId}</td>
+               <td>{this.state.deviceId }</td>
                <td>RSAADD</td>
                <td>21:34</td>
                <td>21:34</td>

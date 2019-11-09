@@ -34,22 +34,28 @@ export default class Devices extends React.Component {
       devices: this.state.devices.concat(msg)
   })
      console.log(this.state.devices)
-     return this.state.devices.map((endpoint, index) => {
-         const { deviceID, name, newDevice,removeDevice } = endpoint //destructuring
-         console.log("found device")
-         return (
-            <tr key={index}>
-           
-               <td>{deviceID}</td>
-               <td>{name}</td>
-          
-               <td><Button>Edit</Button>&nbsp;<Button color="danger" onClick={()=>this.deleteRow(index)}>Delete</Button></td>
-            </tr>
-         )
-      })
+     
  
           
   }
+  renderTable = ()=>{
+    return this.state.devices.map((endpoint, index) => {
+         const { deviceID, name, newDevice,removeDevice } = endpoint //destructuring
+         console.log("found device")
+         var deviceId="1233"
+         return (
+            <tr key={index}>
+           
+               <td><Link to={{pathname: '/device/123'}} target="_blank">{deviceId}</Link></td>
+               <td>{name}</td>
+               <td>UP</td>
+          
+               <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
+            </tr>
+         )
+      })
+  }
+
  
 
 
@@ -84,6 +90,7 @@ export default class Devices extends React.Component {
             </tr>
           <StompJS onMessage={this.onDeviceMessage} topicName="/topic/devices" server=""/>
           
+          {this.renderTable()}
         </tbody>
       </Table>
   
