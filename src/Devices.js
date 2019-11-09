@@ -14,6 +14,13 @@ import App from './App'
 
 export default class Devices extends React.Component {
 
+    constructor(props) {
+    super(props);
+    this.state={
+      devices:[]
+    }
+  }
+
   openDevice = () => {
     window.open("/Device","_blank");
   }
@@ -22,9 +29,26 @@ export default class Devices extends React.Component {
 
     const msg = JSON.parse(message.body)
     console.log(msg)
+     this.setState({
+
+      devices: this.state.devices.concat(msg)
+  })
+     return this.state.devices.map((endpoint, index) => {
+         const { deviceID, name, newDevice,removeDevice } = endpoint //destructuring
+         return (
+            <tr key={index}>
+           
+               <td>{deviceID}</td>
+               <td>{name}</td>
+          
+               <td><Button>Edit</Button>&nbsp;<Button color="danger" onClick={()=>this.deleteRow(index)}>Delete</Button></td>
+            </tr>
+         )
+      })
  
           
   }
+ 
 
 
  render() {
