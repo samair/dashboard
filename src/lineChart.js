@@ -1,7 +1,8 @@
 
 
-import React, { useState } from 'react';
+import React, { useState,Math } from 'react';
 import ReactApexChart from 'react-apexcharts'
+import ApexChart from 'react-apexcharts'
 import { Container,FormGroup,Input,Label} from  'reactstrap'
 import './LineChart.css'
 
@@ -51,14 +52,14 @@ export default class LineChart extends React.Component {
           xaxis: {
             categories: this.props.perfXaxis,
             title: {
-              text: 'Hours'
+              text: 'Times in Seconds'
             }
           },
           yaxis: {
             title: {
-              text: 'Temperature'
+              text: 'CPU Usage'
             },
-            min: 5,
+            min: 0,
             max: 100
           },
           legend: {
@@ -70,10 +71,10 @@ export default class LineChart extends React.Component {
           }
         },
         series: [
-           {
-            name: this.props.perfLabels,
-            data: this.props.perfValues
-          }
+            {
+              name :"",
+              data: [1,2,3,4,5]
+            }
         ],
       }
     }
@@ -105,6 +106,25 @@ export default class LineChart extends React.Component {
         this.setState({series: this.state.series.filter(item => item.name !== event.target.name )
       });
       }
+    } 
+    setValue = (msg) => {
+      console.log("ok now lets update time series!!",msg)
+      const newSeries = [];
+
+      this.state.series.map((s) => {
+        var data = s.data.map((val) => {
+          return val
+        })
+        data = [...data,msg.cpuUsage]
+        data = data.slice(-10)
+        console.log(data)
+        newSeries.push({ data, name: s.name })
+        console.log(newSeries)
+      })
+      
+      this.setState({
+        series: newSeries
+      })
     }
 
     render() {

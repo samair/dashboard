@@ -12,7 +12,7 @@ import Doughnut from './Doughnut'
 import './Doughnut.css' 
 import Radial from './Radial'
 import LineChart from './lineChart'
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaTableTennis } from 'react-icons/fa';
 import { MdInfo } from 'react-icons/md';
 import { FaWifi } from 'react-icons/fa';
 import axios from 'axios'
@@ -28,6 +28,7 @@ constructor(props)  {
     this.cpuRadial = React.createRef();
     this.diskRadial = React.createRef();
     this.memRadial = React.createRef();
+    this.refLineChart = React.createRef();
 
 
     this.state = {
@@ -39,7 +40,8 @@ constructor(props)  {
     diskRadialMounted:false,
     memRadialMounted:false,
     deviceId:"",
-    os:""
+    os:"",
+    cpu_series:[]
     
   };
   this.connectCallBack = this.connectCallBack.bind(this);
@@ -72,15 +74,21 @@ constructor(props)  {
   this.setState({cpu_usage:msg.cpuUsage})
   this.setState({disk_usage:msg.diskUsage})
   this.setState({os:msg.osName})
+  this.setState({cpu_series:this.state.cpu_series.concat(this.state.cpu_usage)})
   this.memRadial.current.setValue(this.state.mem_usage);
   this.cpuRadial.current.setValue(this.state.cpu_usage);
   this.diskRadial.current.setValue(this.state.disk_usage);
+  this.refLineChart.current.setValue(msg);
 
   //console.log(this.state.mem_usage)
  }
     connectCallBack(){
       this.setState({loading:false})
-      this.stompClient.subscribe("/topic/1233", this.onMessageCallBack)
+      const sessionMsg = {
+        deviceId:this.state.deviceId
+      }
+      this.stompClient.send("/stream/start",{},JSON.stringify(sessionMsg))
+      this.stompClient.subscribe("/topic/"+this.state.deviceId, this.onMessageCallBack)
 
      }
      errorCallback=()=>{
@@ -304,8 +312,8 @@ this.randomValues()
 
        <Col>
       
-       <LineChart perfValues={[10,50,31,98,99,19,5,1,1,1,1,1,1,1,1,1,10,20,6]} perfLabels={"CPU Usage"} perfXaxis={[10,50,31,98,99,19,5,1,1,1,1,1,1,1,1,1,2,2,2]}/>
-        <LineChart perfValues={[20,30,32,43,33,12,54]} perfLabels={"Memory"} perfXaxis={[1,2,3,4,5]}/ >
+       
+        <LineChart ref={this.refLineChart} perfValues={this.state.cpu_series} perfLabels={"Memory"} perfXaxis={[1,2,3,4,5]}/ >
        </Col>
        </Row>
        
