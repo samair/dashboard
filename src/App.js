@@ -8,6 +8,8 @@ import {
   Button,
 } from 'reactstrap';
 import Device from './Device'
+import ClippedDrawer from './test'
+import DeviceInfo from './DeviceInfo'
 
 
 
@@ -21,7 +23,9 @@ function App() {
       <Route exact path ="/" component = {Main} />
       <Route exact path="/device" component={Device} />
       <Route exact path="/device/:id" component={Device} />
-
+      <Route exact path="/test" component={ClippedDrawer}/>
+      <Route exact path="/DeviceInfo" component={DeviceInfo} />
+      <Route exact path="/DeviceInfo/:id" component={DeviceInfo} />
       </Switch>
       
       </Router>

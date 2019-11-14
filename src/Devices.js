@@ -10,7 +10,7 @@ import { MdClear } from 'react-icons/md';
 import { BrowserRouter as Router, Route, Switch, withRouter,Link} from 'react-router-dom'
 import StompJS from './StompJs'
 
-import App from './App'
+
 
 export default class Devices extends React.Component {
 
@@ -46,7 +46,7 @@ export default class Devices extends React.Component {
          return (
             <tr key={index}>
            
-               <td><Link to={{pathname: '/device/123'}} target="_blank">{deviceId}</Link></td>
+               <td><Link to={{pathname: '/DeviceInfo/123'}} target="_blank">{deviceId}</Link></td>
                <td>{name}</td>
                <td>UP</td>
           
@@ -60,8 +60,10 @@ export default class Devices extends React.Component {
 
 
  render() {
+  
+   
   return (
-    
+
      <Table>
      
         <thead>
@@ -76,7 +78,8 @@ export default class Devices extends React.Component {
         
         <tr key="1">
            
-               <td><Link to="/device" target="_blank">12231</Link></td>
+               <td><Link to="/DeviceInfo" target="_blank">12231</Link></td>
+          
                <td>Rspmy</td>
                <td>22:34</td>
                <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>

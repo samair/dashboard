@@ -18,6 +18,7 @@ import { FaWifi } from 'react-icons/fa';
 import axios from 'axios'
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
+import Paper from '@material-ui/core/Paper';
 
 export default class Device extends React.Component {
 
@@ -98,9 +99,9 @@ constructor(props)  {
      }
 
    componentDidMount() {
-    this.state.deviceId = this.props.match.params.id
+    //this.state.deviceId = this.props.match.params.id
 
-    console.log("ok",this.props.match.params.id)
+    //console.log("ok",this.props.match.params.id)
 
     const deviceId = 1233;
     axios.post(' https://webvidhi-pubsub.herokuapp.com/subscribe', null, { params: {
@@ -197,6 +198,7 @@ this.randomValues()
   return (
 
     <Container className="deviceContainer">
+      <Paper>
      <Table>
         <thead>
           <tr>
@@ -226,17 +228,17 @@ this.randomValues()
           
         </tbody>
       </Table>
-      
+      </Paper>
   
      
      
-       <p>Stats</p>
-        <Container className="box">
+      <Paper>
+
        <Row>
        <Col xs="auto">
    
           <Radial ref={this.cpuRadial} mounted={this.cpuRadialMount} label="CPU Usage" value={this.state.cpu_usage}  />
-         <button onClick={this.handleClick}>Show real name</button>
+         
        </Col>
        <Col xs="auto">
        
@@ -251,7 +253,8 @@ this.randomValues()
 
 
        </Row>
-    </Container>
+
+    </Paper>
     <p></p>
   
     <Row>

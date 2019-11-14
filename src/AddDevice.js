@@ -18,7 +18,7 @@ const AddDevice = (props) => {
     <div>
       <Button color="success" onClick={toggle}><MdInput/></Button>
       &nbsp;<Button> Reresh all </Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} toggle={toggle} className={className} centered="false">
         <ModalHeader toggle={toggle}>Add Devices</ModalHeader>
         <ModalBody>
         <Label>Device Address</Label>
