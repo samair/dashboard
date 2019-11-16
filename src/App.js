@@ -10,6 +10,7 @@ import {
 import Device from './Device'
 import ClippedDrawer from './test'
 import DeviceInfo from './DeviceInfo'
+import KeysInfo from './KeysInfo'
 
 
 
@@ -20,10 +21,10 @@ function App() {
      <Router>
 
         <Switch>
-      <Route exact path ="/" component = {Main} />
+      <Route exact path ="/" component = {ClippedDrawer} />
       <Route exact path="/device" component={Device} />
       <Route exact path="/device/:id" component={Device} />
-      <Route exact path="/test" component={ClippedDrawer}/>
+      <Route exact path="/Keys" component={KeysInfo} />
       <Route exact path="/DeviceInfo" component={DeviceInfo} />
       <Route exact path="/DeviceInfo/:id" component={DeviceInfo} />
       </Switch>
