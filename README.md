@@ -16,4 +16,7 @@ Agent based monitoring solution for any x86/ARM devices
 3. MacOS
 4. Raspberry PI
 
+### Design
+![alt text](https://github.com/samair/dashboard/blob/master/MonitorMe.jpeg)
+
 
