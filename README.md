@@ -1,4 +1,4 @@
-
+![alt text](https://github.com/samair/dashboard/blob/master/logo1.png)
 
 ## AlphaMon 
 
