@@ -1,7 +1,7 @@
 ![alt text](https://github.com/samair/dashboard/blob/master/logo1.png)
 
 ## AlphaMon 
-
+(Work In Progress for 1.0)
 Agent based monitoring solution for any x86/ARM devices
 
 ### Supported features
