@@ -15,13 +15,15 @@ import KeysInfo from './KeysInfo'
 
 
 import { BrowserRouter as Router, Route, Switch, withRouter,Link} from 'react-router-dom'
+import SignIn from './user/SignIn';
 
 function App() {
   return (
      <Router>
 
         <Switch>
-      <Route exact path ="/" component = {ClippedDrawer} />
+      <Route exact path ="/" component = {SignIn} />
+      <Route exact path ="/dashboard" component = {ClippedDrawer} />
       <Route exact path="/device" component={Device} />
       <Route exact path="/device/:id" component={Device} />
       <Route exact path="/Keys" component={KeysInfo} />
