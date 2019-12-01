@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -7,6 +7,8 @@ import Devices from './Devices'
 import UpChart from './UpChart'
 import AddDevice from './AddDevice'
 import PageLayout from './PageLayout'
+
+import axios from 'axios'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -30,22 +32,34 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-export default function ClippedDrawer() {
+export default function ClippedDrawer(props) {
   const classes = useStyles();
+  const [userId,setUserId] = useState(props.match.params.userName);
+  
+  useEffect(() => {
+    console.log(props.match)
+    // Update the document title using the browser API
+    document.title = 'Device Information of :'+props.match.params.userName;
+   setUserId(props.match.params.userName);
+    console.log(userId)
 
+   
+  });
+ 
   return (
     <div className={classes.root}>
-      <PageLayout/>
+  
+  <PageLayout userId={userId}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Paper><UpChart/></Paper>
         <p></p>
         <Paper>
         <Typography gutterBottom variant="h6">
-              &nbsp; &nbsp;Your Devices
+              &nbsp; &nbsp;Your Devices {userId}
             </Typography>
          
-            <Devices/>
+            <Devices userID={userId}/>
             </Paper>
         <Paper>
             <p>Administration</p>

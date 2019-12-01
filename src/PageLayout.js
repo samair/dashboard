@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -43,17 +43,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function PageLayout(props) {
   const classes = useStyles();
-  const { icon, primary, to } = props;
 
-  const renderLink = React.useMemo(
-    () =>
-      React.forwardRef((linkProps, ref) => (
-        // With react-router-dom@^6.0.0 use `ref` instead of `innerRef`
-        // See https://github.com/ReactTraining/react-router/issues/6056
-        <Link to="/" {...linkProps} innerRef={ref} />
-      )),
-    [to],
-  );
+  const [keysUrl,setKeysUrl] = useState('/keys/'+props.userId)
+  const [dashboardUrl, setDashBoardUrl] = useState('/dashboard/'+props.userId)
 
   return (
     <div className={classes.root}>
@@ -74,12 +66,12 @@ export default function PageLayout(props) {
       >
         <div className={classes.toolbar} />
         <List>
-            <LinkListItem to="/" primary="Devices" icon={<DevicesIcon /> } />
+            <LinkListItem to={dashboardUrl} primary="Devices" icon={<DevicesIcon /> } />
             <LinkListItem to="/drafts" primary="Reports" icon={<ShowChartIcon />} />
         </List>
         <Divider />
         <List>
-        <LinkListItem to="/keys" primary="Keys" icon={<VpnKeyIcon />} />
+        <LinkListItem to={keysUrl} primary="Keys" icon={<VpnKeyIcon />} />
         </List>
       </Drawer>
      

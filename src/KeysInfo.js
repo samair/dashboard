@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PageLayout from './PageLayout'
 import {
@@ -6,13 +6,14 @@ import {
   Button,
 } from 'reactstrap';
 import { Paper } from '@material-ui/core';
-import { Table } from 'reactstrap';
+import { Table,Spinner } from 'reactstrap';
 
 import Typography from '@material-ui/core/Typography'
 import { MdBuild } from 'react-icons/md';
 import { MdClear } from 'react-icons/md';
 
 import CardWithContent from './CardWithContent'
+import axios from 'axios';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -36,26 +37,71 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-export default function KeysInfo() {
+export default function KeysInfo(props) {
   const classes = useStyles();
+  const [userId,setUsedId] = useState(props.match.params.userId)
   const [keys ,setkey] = useState([]);
+  const [loading,setLoading] = useState(false);
+  
+  let url = 'http://localhost:8080/v1/users/apiKey?userID='+userId
+  axios.get(
+    url
 
+  ).then(({data})=>{
+    setkey(data)
+    
+  })
+  
+ 
+
+ 
   const updateKeys = (val) =>{
     console.log(val)
     setkey(keys.concat(val))
   }
+  const removeKeys = (e)=>{
+    setLoading(true)
+    console.log(e)
+    let url = 'http://localhost:8080/v1/users/apiKey?userID='+userId+'&keyID='+e
+    axios.delete(
+      url
+  
+    ).then(({data})=>{
+      setUsedId(userId)
+      setLoading(false)
+      
+    })
+    /*
+    var array = keys
+    keys.map((val,index)=>{
+      if (val.keyID === e){
+        console.log("found")
+        keys.splice(index, 1)
+        console.log(keys)
+      }
+    }
+    )
+    setkey(keys);
+    console.log(keys)
+    */
+  }
 
   return (
     <div className={classes.root}>
-      <PageLayout/>
+      <PageLayout userId={userId}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <CardWithContent keys ={updateKeys}/>
         
       <Paper>
       <Typography gutterBottom variant="h5">
-              &nbsp;Your Keys
+              &nbsp;Your Keys  
+              {loading  ? 
+              (<Spinner type="grow"/>):(<p></p>)}
+                
+              
             </Typography>  
+           
       <Table>
      
      <thead>
@@ -67,36 +113,20 @@ export default function KeysInfo() {
        </tr>
      </thead>
      <tbody>
-     
-     <tr key="1">
-        
-            <td>4533</td>
-       
-            <td>Rspmy</td>
-            <td>22:34</td>
-           <td> <Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
-         </tr>
-       <tr key="2">
-        
-            <td>56909</td>
-            <td>RSAADD</td>
-            <td>21:34</td>
-            <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
-         </tr>
-     
+    
        
    
     
    { 
         keys.map((figure, key) => {
           return (
-          <tr key="1">
+          <tr key={key}>
         
-        <td>{figure}</td>
+        <td>{figure.keyID}</td>
      
           <td>Rspmy</td>
           <td>22:34</td>
-          <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
+          <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" name={key} size="sm" onClick={()=>removeKeys(figure.keyID)}><MdClear/></Button></td>
        </tr>)
         })
       }

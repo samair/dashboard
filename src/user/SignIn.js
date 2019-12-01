@@ -1,18 +1,16 @@
-import React, { useState } from "react"
+import React, { useState,useContext } from "react"
 import Grid from "@material-ui/core/Grid";
 import { Paper } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
-import ClippedDrawer from '../test'
-import {
-    Link,
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect
-  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from 'axios'
+import {Alert} from 'reactstrap'
+import UserContext from '../UserInfoContext'
+
+
 const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
@@ -31,14 +29,46 @@ const useStyles = makeStyles(theme => ({
       },
   }));
 
+
 export default function SignIn() {
-    
+  let history = useHistory();
+   
     const classes = useStyles();
     const[userName,setUserName] = useState();
     const[password,setPassword] = useState();
-    const[validated,setValidated] = useState();
+    const[validated,setValidated] = useState(false);
+    const[loggingin,setLoggingin] = useState(false);
+  
+  
     const signin =() =>{
+      setLoggingin(true)
        console.log("ahaa!")
+       // validate the user.
+
+       axios
+    .post(
+      "http://localhost:8080/v1/users/validate",
+      {
+        user:userName,
+        pass:password
+      }
+    )
+    .then(({ data }) => {
+      console.log(data)
+    
+      setLoggingin(false)
+      if (data) {
+       
+        history.push(`/dashboard/${data}`);
+      }
+      else{
+        setValidated(true)
+        console.log("Error");
+      }
+    });
+       
+
+      
     }
     const userHandler =(e) =>{
         setUserName(e.target.value)
@@ -49,6 +79,7 @@ export default function SignIn() {
         console.log(e.target.value)
     }
 return(
+<UserContext.Provider value="ok">
     <Grid
     container
     spacing={0}
@@ -56,7 +87,12 @@ return(
     alignItems="center"
     justify="center"
     style={{ minHeight: "100vh" }}
-><Paper className={classes.Paper}>
+> 
+
+
+
+  
+  <Paper className={classes.Paper}>
 
 <form className={classes.container} noValidate autoComplete="off">
       <div>
@@ -86,13 +122,19 @@ return(
           onChange={passwordHandler}
         />
         <br></br>
-        <Button variant="outlined" className={classes.button}  component={Link} to="/dashboard" onClick={signin}>
-      SignIn
+        <Button variant="outlined" className={classes.button}  onClick={signin}>
+        
+         &nbsp;SignIn
       </Button>
-      
+      <Alert color="danger" isOpen={validated} >
+        Invalid User Name or Password!
+      </Alert>
           </div>
 </form>
-    </Paper></Grid>
+    </Paper>
+ 
+    </Grid>
+    </UserContext.Provider>
 );
     
 }

@@ -23,12 +23,12 @@ function App() {
 
         <Switch>
       <Route exact path ="/" component = {SignIn} />
-      <Route exact path ="/dashboard" component = {ClippedDrawer} />
+      <Route exact path ="/dashboard/:userName" component = {ClippedDrawer} />
       <Route exact path="/device" component={Device} />
       <Route exact path="/device/:id" component={Device} />
-      <Route exact path="/Keys" component={KeysInfo} />
+      <Route exact path="/Keys/:userId" component={KeysInfo} />
       <Route exact path="/DeviceInfo" component={DeviceInfo} />
-      <Route exact path="/DeviceInfo/:id" component={DeviceInfo} />
+      <Route exact path="/DeviceInfo/:userId" component={DeviceInfo} />
       </Switch>
       
       </Router>
