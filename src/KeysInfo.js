@@ -43,7 +43,7 @@ export default function KeysInfo(props) {
   const [keys ,setkey] = useState([]);
   const [loading,setLoading] = useState(false);
   
-  let url = 'http://localhost:8080/v1/users/apiKey?userID='+userId
+  let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId
   axios.get(
     url
 
@@ -62,7 +62,7 @@ export default function KeysInfo(props) {
   const removeKeys = (e)=>{
     setLoading(true)
     console.log(e)
-    let url = 'http://localhost:8080/v1/users/apiKey?userID='+userId+'&keyID='+e
+    let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId+'&keyID='+e
     axios.delete(
       url
   

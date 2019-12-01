@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('http://localhost:8080/pubsub');
+    var socket = new SockJS('https://webvidhi-pubsub.herokuapp.com/pubsub');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);

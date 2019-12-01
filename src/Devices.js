@@ -41,7 +41,7 @@ export default class Devices extends React.Component {
   }
   componentDidMount() {
     console.log(this.props)
-    let url = 'http://localhost:8080/v1/users/devices?userId='+this.props.userID
+    let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/devices?userId='+this.props.userID
     axios.
     get(
       url
