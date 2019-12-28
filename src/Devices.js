@@ -40,15 +40,24 @@ export default class Devices extends React.Component {
           
   }
   componentDidMount() {
-    console.log(this.props)
-    let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/devices?userId='+this.props.userID
+    console.log(this.props.token)
+
+   // let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/devices
+   let url = 'http://localhost:9090/device'
+    var config = {
+      headers: { "Authorization": `Bearer ${this.props.token}` }
+  }
+  console.log(config)
     axios.
     get(
-      url
-
+      url,
+     config
     ).
     then(({ data }) => {
       console.log(data)
+      if (data === ""){
+      }
+      else {
       data.map((e,i) =>{
         console.log(e)
         this.setState({
@@ -56,7 +65,7 @@ export default class Devices extends React.Component {
           devices: this.state.devices.concat(e)
       })
       })
-      
+    }
     });
   }
   renderTable = ()=>{

@@ -38,6 +38,7 @@ export default function SignIn() {
     const[password,setPassword] = useState();
     const[validated,setValidated] = useState(false);
     const[loggingin,setLoggingin] = useState(false);
+    const[error,setError] = useState(false);
   
   
     const signin =() =>{
@@ -47,24 +48,29 @@ export default function SignIn() {
 
        axios
     .post(
-      "https://webvidhi-pubsub.herokuapp.com/v1/users/validate",
+     // "https://webvidhi-pubsub.herokuapp.com/v1/users/validate",
+     "http://localhost:9090/user/validate",
       {
         user:userName,
         pass:password
       }
     )
     .then(({ data }) => {
-      console.log(data)
+      console.log(data.accessToken)
     
       setLoggingin(false)
       if (data) {
-       
-        history.push(`/dashboard/${data}`);
+        localStorage.setItem("BearerToken",data.accessToken)
+        history.push(`/dashboard/${userName}`);
       }
       else{
         setValidated(true)
         console.log("Error");
       }
+    })
+    .catch(()=>{
+      //login issue show error
+      setError(true)
     });
        
 
@@ -72,13 +78,19 @@ export default function SignIn() {
     }
     const userHandler =(e) =>{
         setUserName(e.target.value)
+        setError(false)
+        setValidated(false)
         console.log(e.target.value)
     }
     const passwordHandler =(e) =>{
         setPassword(e.target.value)
+        setError(false)
+        setValidated(false)
         console.log(e.target.value)
     }
 return(
+
+
 <UserContext.Provider value="ok">
     <Grid
     container
@@ -128,6 +140,9 @@ return(
       </Button>
       <Alert color="danger" isOpen={validated} >
         Invalid User Name or Password!
+      </Alert>
+      <Alert color="danger" isOpen={error} >
+        Oops! Somethings wrong, try again..
       </Alert>
           </div>
 </form>

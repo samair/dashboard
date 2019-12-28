@@ -19,8 +19,12 @@ const GenerateKey = (props) => {
 
   const toggle = () => {
     setModal(!modal);
+    let url = "http://localhost:9090/user/apikey"
+    var config = {
+      headers: { "Authorization": `Bearer` }
+  }
     axios
-    .get(
+    .put(
       "https://webvidhi-pubsub.herokuapp.com/apikey"
     )
     .then(({ data }) => {

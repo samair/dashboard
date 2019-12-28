@@ -40,17 +40,25 @@ const useStyles = makeStyles(theme => ({
 export default function KeysInfo(props) {
   const classes = useStyles();
   const [userId,setUsedId] = useState(props.match.params.userId)
+  const [token,setToken] = useState(props.match.params.token)
   const [keys ,setkey] = useState([]);
   const [loading,setLoading] = useState(false);
+  const getData = useState(()=>{
+    //let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId
+    let url = 'http://localhost:9090/user/apiKey'
+    var config = {
+      headers: { "Authorization": `Bearer ${token}` }
+  }
+    axios.get(
+      url,config
   
-  let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId
-  axios.get(
-    url
-
-  ).then(({data})=>{
-    setkey(data)
-    
+    ).then(({data})=>{
+      setkey(data)
+      
+    })
   })
+
+ 
   
  
 
@@ -62,33 +70,26 @@ export default function KeysInfo(props) {
   const removeKeys = (e)=>{
     setLoading(true)
     console.log(e)
-    let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId+'&keyID='+e
+    var config = {
+      headers: { "Authorization": `Bearer ${token}` }
+  }
+    //let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId+'&keyID='+e
+    let url = 'http://localhost:9090/user/apiKey?&keyID='+e
     axios.delete(
-      url
+      url,config
   
     ).then(({data})=>{
       setUsedId(userId)
       setLoading(false)
+      setkey(data)
       
     })
-    /*
-    var array = keys
-    keys.map((val,index)=>{
-      if (val.keyID === e){
-        console.log("found")
-        keys.splice(index, 1)
-        console.log(keys)
-      }
-    }
-    )
-    setkey(keys);
-    console.log(keys)
-    */
+   
   }
 
   return (
     <div className={classes.root}>
-      <PageLayout userId={userId}/>
+      <PageLayout userId={userId} token ={token}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <CardWithContent keys ={updateKeys}/>

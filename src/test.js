@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-
+import { useHistory } from "react-router-dom";
 import Devices from './Devices'
 import UpChart from './UpChart'
 import AddDevice from './AddDevice'
@@ -35,13 +35,18 @@ const useStyles = makeStyles(theme => ({
 export default function ClippedDrawer(props) {
   const classes = useStyles();
   const [userId,setUserId] = useState(props.match.params.userName);
-  
+  const [token,setToken] = useState(localStorage.getItem("BearerToken"));
+  let history = useHistory();
   useEffect(() => {
-    console.log(props.match)
+    console.log(props.match.params.token)
     // Update the document title using the browser API
     document.title = 'Device Information of :'+props.match.params.userName;
    setUserId(props.match.params.userName);
     console.log(userId)
+    if (localStorage.getItem("BearerToken") === null){
+      console.log("Invalid session")
+      history.push("/")
+    }
 
    
   });
@@ -49,7 +54,7 @@ export default function ClippedDrawer(props) {
   return (
     <div className={classes.root}>
   
-  <PageLayout userId={userId}/>
+  <PageLayout token={token} userId={userId}/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Paper><UpChart/></Paper>
@@ -59,7 +64,7 @@ export default function ClippedDrawer(props) {
               &nbsp; &nbsp;Your Devices {userId}
             </Typography>
          
-            <Devices userID={userId}/>
+            <Devices userID={userId} token={token}/>
             </Paper>
         <Paper>
             <p>Administration</p>

@@ -104,7 +104,7 @@ constructor(props)  {
     //console.log("ok",this.props.match.params.id)
 
     const deviceId = 1233;
-    axios.post(' https://webvidhi-pubsub.herokuapp.com/subscribe', null, { params: {
+    axios.post('https://webvidhi-pubsub.herokuapp.com/subscribe', null, { params: {
     deviceId
     }})
     .then(response => response.status)
