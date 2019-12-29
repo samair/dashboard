@@ -45,7 +45,7 @@ export default function KeysInfo(props) {
   const [loading,setLoading] = useState(false);
   const getData = useState(()=>{
     //let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId
-    let url = 'http://localhost:9090/user/apiKey'
+    let url = 'https://gateway-alphamon.herokuapp.com/user/apiKey'
     var config = {
       headers: { "Authorization": `Bearer ${token}` }
   }
@@ -74,7 +74,8 @@ export default function KeysInfo(props) {
       headers: { "Authorization": `Bearer ${token}` }
   }
     //let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId+'&keyID='+e
-    let url = 'http://localhost:9090/user/apiKey?&keyID='+e
+    //let url = 'http://localhost:9090/user/apiKey?&keyID='+e
+    let url = 'https://gateway-alphamon.herokuapp.com/user/apiKey?&keyID='+e
     axios.delete(
       url,config
   

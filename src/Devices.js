@@ -5,20 +5,23 @@ import {
 } from 'reactstrap';
 import React from 'react';
 import { Table } from 'reactstrap';
-import { MdBuild } from 'react-icons/md';
-import { MdClear } from 'react-icons/md';
-import { BrowserRouter as Router, Route, Switch, withRouter,Link} from 'react-router-dom'
+
+
+import { BrowserRouter as Router, Route, Switch, useHistory,Link,Redirect} from 'react-router-dom'
 import StompJS from './StompJs'
 import axios from 'axios';
-
+import AlertDialog from "./AlertDialouge"
 
 
 export default class Devices extends React.Component {
 
     constructor(props) {
+    
     super(props);
     this.state={
-      devices:[]
+      devices:[],
+      invalidSession: false
+
     }
   }
 
@@ -43,7 +46,7 @@ export default class Devices extends React.Component {
     console.log(this.props.token)
 
    // let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/devices
-   let url = 'http://localhost:9090/device'
+   let url = 'https://gateway-alphamon.herokuapp.com/device'
     var config = {
       headers: { "Authorization": `Bearer ${this.props.token}` }
   }
@@ -66,22 +69,27 @@ export default class Devices extends React.Component {
       })
       })
     }
+    })
+    .catch(()=>{
+      this.setState({invalidSession:true})
     });
   }
   renderTable = ()=>{
    
     return this.state.devices.map((endpoint, index) => {
-         const { _id, deviceName, newDevice,removeDevice } = endpoint //destructuring
+         const { _id, deviceName, status,removeDevice } = endpoint //destructuring
          console.log("found device")
          var deviceId=_id
+         let deviceUrl = '/device/DeviceInfo/'+ deviceId
          return (
             <tr key={index}>
-           
-               <td><Link to={{pathname: '/DeviceInfo/123'}} target="_blank">{deviceId}</Link></td>
+              
+               <td><Link to={{pathname: deviceUrl}} target="_blank">{deviceId}</Link></td>
                <td>{deviceName}</td>
-               <td>UP</td>
+               <td>{status}</td>
           
-               <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" size="sm"><MdClear/></Button></td>
+               <td><AlertDialog/>
+         </td>
             </tr>
          )
       })
@@ -91,7 +99,9 @@ export default class Devices extends React.Component {
 
 
  render() {
-  
+  if (this.state.invalidSession){
+    return <Redirect to='/' />
+  }
    
   return (
 

@@ -59,6 +59,11 @@ export default function ClippedDrawer(props) {
         <div className={classes.toolbar} />
         <Paper><UpChart/></Paper>
         <p></p>
+        <Paper  className={classes.content}>
+            <h6>Administration</h6>
+            <AddDevice buttonLabel="Add Device"/>
+        </Paper>
+        <p></p>
         <Paper>
         <Typography gutterBottom variant="h6">
               &nbsp; &nbsp;Your Devices {userId}
@@ -66,10 +71,7 @@ export default function ClippedDrawer(props) {
          
             <Devices userID={userId} token={token}/>
             </Paper>
-        <Paper>
-            <p>Administration</p>
-            <AddDevice buttonLabel="Add Device"/>
-        </Paper>
+     
         
       </main>
     </div>
