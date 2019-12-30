@@ -20,7 +20,7 @@ const GenerateKey = (props) => {
   const toggle = () => {
     setModal(!modal);
     let url = "https://gateway-alphamon.herokuapp.com/user/apikey"
-    token = localStorage.getItem("BearerToken") 
+    let token = localStorage.getItem("BearerToken") 
   
     var config = {
       headers: { "Authorization": `Bearer+${token}` }
@@ -42,6 +42,7 @@ const GenerateKey = (props) => {
   };
 
   const addkey = () =>{
+    let url = "https://gateway-alphamon.herokuapp.com/user/apikey"
     var token = localStorage.getItem("BearerToken") 
   
     var config = {
