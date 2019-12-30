@@ -19,13 +19,15 @@ const GenerateKey = (props) => {
 
   const toggle = () => {
     setModal(!modal);
-    let url = "http://localhost:9090/user/apikey"
+    let url = "https://gateway-alphamon.herokuapp.com/user/apikey"
+    token = localStorage.getItem("BearerToken") 
+  
     var config = {
-      headers: { "Authorization": `Bearer` }
+      headers: { "Authorization": `Bearer+${token}` }
   }
     axios
-    .put(
-      "https://webvidhi-pubsub.herokuapp.com/apikey"
+    .post(
+      url
     )
     .then(({ data }) => {
       setKey(data);
@@ -40,8 +42,19 @@ const GenerateKey = (props) => {
   };
 
   const addkey = () =>{
-
-    
+    token = localStorage.getItem("BearerToken") 
+  
+    var config = {
+      headers: { "Authorization": `Bearer+${token}` }
+  }
+    let keyInfo = {
+      keyID:key,
+      decription:iKey
+    }
+    axios
+    .put(
+      url,keyInfo,config
+    )
     props.addKeys(iKey)
     //console.log(keys)
     setModal(!modal);
