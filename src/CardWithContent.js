@@ -68,9 +68,7 @@ export default function CardWithContent (props){
       </div>
       <div className={classes.section3}>
         <GenerateKey addKeys={addKeys}/>
-        { 
-       keys
-      }
+       
       </div>
     </div>
   );

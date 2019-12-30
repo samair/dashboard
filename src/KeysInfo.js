@@ -41,11 +41,11 @@ export default function KeysInfo(props) {
   const classes = useStyles();
   const [userId,setUsedId] = useState(props.match.params.userId)
   const [token,setToken] = useState(props.match.params.token)
-  const [keys ,setkey] = useState([]);
+  const [keys ,setkey] = useState([{}]);
   const [loading,setLoading] = useState(false);
   const getData = useState(()=>{
     //let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/apiKey?userID='+userId
-    let url = 'https://gateway-alphamon.herokuapp.com/user/apiKey'
+    let url = 'https://gateway-alphamon.herokuapp.com/user/keys'
     var config = {
       headers: { "Authorization": `Bearer ${token}` }
   }
@@ -108,8 +108,8 @@ export default function KeysInfo(props) {
      
      <thead>
        <tr>
-         <th>KeyID</th>
-         <th>Device Name</th>
+         <th>Key</th>
+         <th>Description</th>
          <th>Status</th>
          <th>Actions</th>
        </tr>
@@ -126,8 +126,8 @@ export default function KeysInfo(props) {
         
         <td>{figure.keyID}</td>
      
-          <td>Rspmy</td>
-          <td>22:34</td>
+          <td>{figure.description}</td>
+          <td>Valid</td>
           <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" name={key} size="sm" onClick={()=>removeKeys(figure.keyID)}><MdClear/></Button></td>
        </tr>)
         })

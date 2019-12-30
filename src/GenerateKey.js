@@ -19,15 +19,15 @@ const GenerateKey = (props) => {
 
   const toggle = () => {
     setModal(!modal);
-    let url = "https://gateway-alphamon.herokuapp.com/user/apikey"
+    let url = "https://gateway-alphamon.herokuapp.com/user/key"
     let token = localStorage.getItem("BearerToken") 
   
     var config = {
-      headers: { "Authorization": `Bearer+${token}` }
+      headers: { "Authorization": `Bearer ${token}` }
   }
     axios
-    .post(
-      url
+    .get(
+      url,config
     )
     .then(({ data }) => {
       setKey(data);
@@ -42,21 +42,21 @@ const GenerateKey = (props) => {
   };
 
   const addkey = () =>{
-    let url = "https://gateway-alphamon.herokuapp.com/user/apikey"
+    let url = "https://gateway-alphamon.herokuapp.com/user/apiKey"
     var token = localStorage.getItem("BearerToken") 
   
     var config = {
-      headers: { "Authorization": `Bearer+${token}` }
+      headers: { "Authorization": `Bearer ${token}` }
   }
     let keyInfo = {
       keyID:key,
-      decription:iKey
+      description:iKey
     }
     axios
-    .put(
+    .post(
       url,keyInfo,config
     )
-    props.addKeys(iKey)
+    props.addKeys(keyInfo)
     //console.log(keys)
     setModal(!modal);
   };
