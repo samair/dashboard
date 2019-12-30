@@ -42,7 +42,7 @@ const GenerateKey = (props) => {
   };
 
   const addkey = () =>{
-    token = localStorage.getItem("BearerToken") 
+    var token = localStorage.getItem("BearerToken") 
   
     var config = {
       headers: { "Authorization": `Bearer+${token}` }
