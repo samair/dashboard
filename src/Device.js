@@ -40,7 +40,7 @@ constructor(props)  {
     cpuRadialMounted:false,
     diskRadialMounted:false,
     memRadialMounted:false,
-    deviceId:"",
+    deviceId:this.props.deviceId,
     os:"",
     cpu_series:[]
     
@@ -101,19 +101,7 @@ constructor(props)  {
      }
 
    componentDidMount() {
-    //this.state.deviceId = this.props.match.params.id
 
-    //console.log("ok",this.props.match.params.id)
-
-    const deviceId = 1233;
-    axios.post('https://webvidhi-pubsub.herokuapp.com/subscribe', null, { params: {
-    deviceId
-    }})
-    .then(response => response.status)
-    .catch(err => console.warn(err));
-
-
-    
     
 
     this.stompClient.connect( {}, this.connectCallBack, this.errorCallback);

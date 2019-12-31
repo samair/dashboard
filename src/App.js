@@ -28,7 +28,7 @@ function App() {
       <Route exact path="/device/:id" component={Device} />
       <Route exact path="/Keys/:token/:userId" component={KeysInfo} />
       <Route exact path="/DeviceInfo" component={DeviceInfo} />
-      <Route exact path="/DeviceInfo/:userId" component={DeviceInfo} />
+      <Route exact path="/DeviceInfo/:deviceId" component={DeviceInfo} />
       </Switch>
       
       </Router>

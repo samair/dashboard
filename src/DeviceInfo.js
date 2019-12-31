@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -44,9 +44,9 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-export default function DeviceInfo() {
+export default function DeviceInfo(props) {
   const classes = useStyles();
-
+  const [deviceId,setDeviceId] = useState(props.match.params.deviceId);
   return (
     <div className={classes.root}>
        <PageLayout/>
@@ -55,7 +55,7 @@ export default function DeviceInfo() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <BdCrumb></BdCrumb>
-            <Device/>
+            <Device deviceId = {deviceId}/>
         
       </main>
     </div>
