@@ -47,7 +47,7 @@ constructor(props)  {
   };
   this.connectCallBack = this.connectCallBack.bind(this);
   this.onMessageCallBack = this.onMessageCallBack.bind(this);
-  this.socket = new SockJS('https://webvidhi-pubsub.herokuapp.com/test');
+  this.socket = new SockJS('https://gateway-alphamon.herokuapp.com/device/connect');
   this.stompClient = Stomp.over(this.socket);
   }
   randomValues = () =>{
@@ -88,7 +88,9 @@ constructor(props)  {
       const sessionMsg = {
         deviceId:this.state.deviceId
       }
+     
       this.stompClient.send("/stream/start",{},JSON.stringify(sessionMsg))
+      
       this.stompClient.subscribe("/topic/"+this.state.deviceId, this.onMessageCallBack)
 
      }

@@ -15,7 +15,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import DevicesIcon from '@material-ui/icons/Devices';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
-
+import PageLayout from './PageLayout'
 import BdCrumb from './BreadCrumb'
 
 import Device from './Device'
@@ -49,42 +49,9 @@ export default function DeviceInfo() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} style={{ background: '#2E3B55' }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-          AlphaMon 
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
-        <List>
-          {['Devices', 'Reports'].map((text, index) => (
-            <ListItem button key={text}>
-
-              <ListItemIcon>{index % 2 === 0 ? <DevicesIcon /> : <ShowChartIcon />}</ListItemIcon>
-              
-              <Link to="/" target="_blank"><ListItemText primary={text} ></ListItemText></Link>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Keys', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+       <PageLayout/>
+ 
+      
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <BdCrumb></BdCrumb>

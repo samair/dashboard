@@ -80,7 +80,7 @@ export default class Devices extends React.Component {
          const { _id, deviceName, status,removeDevice } = endpoint //destructuring
          console.log("found device")
          var deviceId=_id
-         let deviceUrl = '/device/DeviceInfo/'+ deviceId
+         let deviceUrl = '/DeviceInfo/'+ deviceId
          return (
             <tr key={index}>
               
