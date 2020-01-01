@@ -72,9 +72,15 @@ export default class LineChart extends React.Component {
         },
         series: [
             {
-              name :"",
+              name :"CPU",
               data: [1,2,3,4,5]
             }
+        ],
+        memorySeries: [
+          {
+            name :"Memory",
+              data: [1,2,3,4,5]
+          }
         ],
       }
     }
@@ -110,21 +116,43 @@ export default class LineChart extends React.Component {
     setValue = (msg) => {
       console.log("ok now lets update time series!!",msg)
       const newSeries = [];
+      const newMemSeries = [];
 
       this.state.series.map((s) => {
         var data = s.data.map((val) => {
           return val
         })
+        console.log(s.name)
+        if (s.name === "CPU"){
         data = [...data,msg.cpuUsage]
         data = data.slice(-10)
         console.log(data)
         newSeries.push({ data, name: s.name })
         console.log(newSeries)
+        }
+      })
+
+      this.state.memorySeries.map((s) =>{
+        var data = s.data.map((val) => {
+          return val
+        })
+        console.log(s.name)
+        if (s.name === "Memory"){
+        data = [...data,msg.memUsage]
+        data = data.slice(-10)
+        console.log(data)
+        newMemSeries.push({ data, name: s.name })
+        console.log(newMemSeries)
+        }
       })
       
       this.setState({
         series: newSeries
       })
+      this.setState({
+        memorySeries: newMemSeries
+      })
+      // set the value of memory 
     }
 
     render() {
@@ -147,6 +175,8 @@ export default class LineChart extends React.Component {
 
       </FormGroup>
             <ReactApexChart options={this.state.options} series={this.state.series} type="line" height="350" />
+            <p>Memory:</p>
+            <ReactApexChart options={this.state.options} series={this.state.memorySeries} type="line" height="350" />
           </div>
           </Container>
   

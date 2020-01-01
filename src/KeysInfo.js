@@ -110,6 +110,7 @@ export default function KeysInfo(props) {
        <tr>
          <th>Key</th>
          <th>Description</th>
+         <th>Device </th>
          <th>Status</th>
          <th>Actions</th>
        </tr>
@@ -127,6 +128,7 @@ export default function KeysInfo(props) {
         <td>{figure.keyID}</td>
      
           <td>{figure.description}</td>
+          <td>{figure.deviceId}</td>
           <td>Valid</td>
           <td><Button size="sm"><MdBuild/></Button>&nbsp;<Button color="danger" name={key} size="sm" onClick={()=>removeKeys(figure.keyID)}><MdClear/></Button></td>
        </tr>)

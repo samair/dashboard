@@ -105,66 +105,7 @@ constructor(props)  {
     
 
     this.stompClient.connect( {}, this.connectCallBack, this.errorCallback);
-  
-   /*
-    stompClient.subscribe("/topic/device1");
-     
 
-    // Set the websocket
-    this.devWebScoket.onopen = () => {
-        // on connecting, do nothing but log it to the console
-        console.log('connected')
-       
-this.randomValues()
-        this.devWebScoket.send(JSON.stringify(this.state.message));
-        }
-
-        this.devWebScoket.onmessage = evt => {
-        // listen to data sent from the websocket server
-
-         
-        console.log(JSON.parse(evt.data))
-        const messageRecv =JSON.parse(evt.data)
-        
-        this.setState({cpu_usage: messageRecv.cpu})
-         this.setState({mem_usage: messageRecv.mem})
-          this.setState({temp_usage: messageRecv.temp})
-           this.setState({wifi_usage: messageRecv.wifi})
-         this.setState({disk_usage: messageRecv.disk})
-          
-         if (this.state.cpuRadialMounted){
-              this.cpuRadial.current.setValue(this.state.cpu_usage);
-         }
-          if (this.state.diskRadialMounted){
-              this.diskRadial.current.setValue(this.state.disk_usage);
-         }
-          if (this.state.memRadialMounted){
-              this.memRadial.current.setValue(this.state.mem_usage);
-         }
-        this.setState({loading:false})
-        this.randomValues()
-          this.devWebScoket.send(JSON.stringify(this.state.message));
-       
-        }
-
-        this.devWebScoket.onclose = () => {
-        console.log('disconnected')
-        // automatically try to reconnect on connection loss
-       
-        }
-
-
-  
-    axios.get('https://webvidhi.free.beeceptor.com/cpu')
-      .then(res => {
-           console.log(res.data);   
-        const cpu = res.data;
-        this.setState({ cpu_usage:res.data.cpu_used});
-        console.log(this.state.cpu_usage);  
-       //this.setState({ cpu_usage:cpu.cpu_used}); 
-       //this.setState({loading:false})
-      })
-      */
    }
 
    cpuRadialMount = () => {
@@ -206,7 +147,7 @@ this.randomValues()
             <tr key="2">
            
                <td>{this.state.deviceId }</td>
-               <td>RSAADD</td>
+               <td>{}</td>
                <td>21:34</td>
                <td>21:34</td>
                <td>21:34</td>
