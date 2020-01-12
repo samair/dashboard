@@ -19,7 +19,7 @@ const GenerateKey = (props) => {
 
   const toggle = () => {
     setModal(!modal);
-    let url = "https://gateway-alphamon.herokuapp.com/user/key"
+    let url = "http://kong-proxy.kong.svc.cluster.local/user/key"
     let token = localStorage.getItem("BearerToken") 
   
     var config = {
@@ -42,7 +42,7 @@ const GenerateKey = (props) => {
   };
 
   const addkey = () =>{
-    let url = "https://gateway-alphamon.herokuapp.com/user/apiKey"
+    let url = "http://kong-proxy.kong.svc.cluster.local/user/apiKey"
     var token = localStorage.getItem("BearerToken") 
   
     var config = {

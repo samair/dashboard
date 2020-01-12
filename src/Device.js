@@ -47,7 +47,7 @@ constructor(props)  {
   };
   this.connectCallBack = this.connectCallBack.bind(this);
   this.onMessageCallBack = this.onMessageCallBack.bind(this);
-  this.socket = new SockJS('https://gateway-alphamon.herokuapp.com/device/connect');
+  this.socket = new SockJS('http://kong-proxy.kong.svc.cluster.local/device/connect');
   this.stompClient = Stomp.over(this.socket);
   }
   randomValues = () =>{

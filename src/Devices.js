@@ -46,7 +46,7 @@ export default class Devices extends React.Component {
     console.log(this.props.token)
 
    // let url = 'https://webvidhi-pubsub.herokuapp.com/v1/users/devices
-   let url = 'https://gateway-alphamon.herokuapp.com/device'
+   let url = 'http://kong-proxy.kong.svc.cluster.local/device'
     var config = {
       headers: { "Authorization": `Bearer ${this.props.token}` }
   }

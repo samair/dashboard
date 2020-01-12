@@ -50,7 +50,7 @@ export default function SignIn() {
        axios
     .post(
      // "https://webvidhi-pubsub.herokuapp.com/v1/users/validate",
-     "https://gateway-alphamon.herokuapp.com/user/validate",
+     "http://kong-proxy.kong.svc.cluster.local/user/validate",
       {
         user:userName,
         pass:password
